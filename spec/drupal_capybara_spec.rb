@@ -7,7 +7,6 @@ require 'yaml'
 
 Capybara.default_driver = :webkit
 Capybara.javascript_driver = :webkit
-# Capybara.app_host = yaml['site']
 
 describe "DrupalTest" do
   class DrupalSiteObject < Struct.new(:url, :user, :password); end
