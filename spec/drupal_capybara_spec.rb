@@ -23,7 +23,7 @@ describe "DrupalTest" do
   end
 
   it "login works" do
-    #login_to_site(site.url, site.user, site.password)
+    login_to_site(site.url, site.user, site.password)
     verify_login_worked
   end
 end
