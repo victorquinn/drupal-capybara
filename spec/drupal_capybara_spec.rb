@@ -3,20 +3,27 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara/webkit'
 require 'spec_helper.rb'
-#require 'test_helper.rb'
 require 'yaml'
-
-# First load the config file and all its attributes
-yaml = YAML::load(File.expand_path("../config.yaml"))
-site = yaml['site']
 
 Capybara.default_driver = :webkit
 Capybara.javascript_driver = :webkit
-Capybara.app_host = site
+# Capybara.app_host = yaml['site']
 
-describe "Testing VictorQuinn.com" do
+describe "DrupalTest" do
+  class DrupalSiteObject < Struct.new(:url, :user, :password); end
+
+  let(:site) do
+    # First load the config file and all its attributes
+    yaml = YAML::load(File.open('config.yaml'))
+    DrupalSiteObject.new(yaml['site'], yaml['user'], yaml['password'])
+  end
+
   it "page can be hit" do
-    visit "http://victorquinn.com"
-    page.should have_content("Victor")
+    visit site.url
+  end
+
+  it "login works" do
+    #login_to_site(site.url, site.user, site.password)
+    verify_login_worked
   end
 end
