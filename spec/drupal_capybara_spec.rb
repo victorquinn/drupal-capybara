@@ -22,7 +22,22 @@ describe "DrupalTest" do
   end
 
   it "login works" do
-    login_to_site(site.url, site.user, site.password)
+    visit "#{site.url}/user"
+    login_to_site(site.user, site.password)
     verify_login_worked
   end
+
+  # Note: this is commented out by default on purpose. I wanted to include a
+  # sample test, but beyond a login, many tests are specific to your Drupal site
+  # setup so I include this but it comes commented so it can be tweaked to fit
+  # your site particulars.
+  # it "submitting subscribe works" do
+  #   10.times do |i|
+  #     start = Time.now
+  #     visit site.url
+  #     submit_subscribe_form
+  #     page.should have_content("Thanks for your interest")
+  #     p Time.now - start
+  #   end
+  # end
 end
